@@ -1,0 +1,4 @@
+include LICENSE
+include README.rst
+recursive-include oc_core/static *
+recursive-include oc_core/templates *
