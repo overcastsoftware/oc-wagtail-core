@@ -60,7 +60,7 @@ class ImageImporter(object):
       img = requests.get(self.decoded_url)
       fname = self.filename.encode('utf8')
       #print "Fetching image: %s" % fname
-      fname_to_write = fname
+      fname_to_write = os.path.join(image_dir, fname)
       print "fname_to_write"
       print fname_to_write
       if not os.path.exists(image_dir):
