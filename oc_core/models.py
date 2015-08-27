@@ -1,10 +1,12 @@
 from django.db import models
 
 from wagtail.wagtailcore.models import Page, Orderable
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
+from wagtail.wagtailcore.fields import RichTextField, StreamField
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
+from wagtail.wagtailcore import blocks
+from wagtail.wagtailsnippets.models import register_snippet
 
 from modelcluster.fields import ParentalKey
 
@@ -79,3 +81,31 @@ StandardPage.content_panels = [
 StandardPage.promote_panels = Page.promote_panels + [
     ImageChooserPanel('feed_image'),
 ]
+
+
+
+class Navigation(models.Model):
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255)
+    navigation = StreamField([
+        ('menu_block', blocks.StructBlock([
+            ('title', blocks.CharBlock()),
+            ('menu_items', blocks.ListBlock(blocks.StreamBlock([
+                ('link_external', blocks.StructBlock([
+                        ('caption', blocks.CharBlock()),
+                        ('url', blocks.CharBlock()),
+                    ])),
+                ('link_page', blocks.PageChooserBlock()),
+            ])))])),
+    ], blank=True)
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('slug'),
+        StreamFieldPanel('navigation'),
+    ]
+
+    def __unicode__(self):
+        return self.title
+
+register_snippet(Navigation)
