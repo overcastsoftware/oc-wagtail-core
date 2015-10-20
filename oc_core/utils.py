@@ -30,7 +30,7 @@ class ImageImporter(object):
         try:
             self.image = Image.objects.get(title=self.title)
         except Image.DoesNotExist:
-            print u"Fetching image from url"
+            print u"Getting image"
             tmp_image = self.get_image()
             self.image = self.save_image(tmp_image)
         except Image.MultipleObjectsReturned:
@@ -68,7 +68,7 @@ class ImageImporter(object):
         if os.path.exists(fname_to_write):
             print "Found image in scrapedir, skipping."
         else:
-            print "Fetching image: %s" % self.decoded_url
+            print "Fetching image from url: %s" % self.decoded_url
             img = requests.get(self.decoded_url)
 
             if not os.path.exists(image_dir):
