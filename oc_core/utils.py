@@ -46,28 +46,32 @@ class ImageImporter(object):
 
 
     def decode_url(self):
-      #print url
-      #print repr(urllib2.unquote(url))
-      return urllib2.unquote(self.image_url)
+        #print url
+        #print repr(urllib2.unquote(url))
+        return urllib2.unquote(self.image_url)
 
 
     def get_filename_from_url(self):
-      return self.decoded_url.split('/')[-1]
+        return self.decoded_url.split('/')[-1]
 
 
     def get_image(self):
-      image_dir = self.scrape_dir
-      img = requests.get(self.decoded_url)
-      fname = self.filename.encode('utf8')
-      #print "Fetching image: %s" % fname
-      fname_to_write = os.path.join(image_dir, fname)
-      print "fname_to_write"
-      print fname_to_write
-      if not os.path.exists(image_dir):
-        os.makedirs(image_dir)
-      with open(fname_to_write, 'w') as f:
-        f.write(img.content)
-        #print "... wrote %s" % fname_to_write
+        image_dir = self.scrape_dir
+        fname = self.filename.encode('utf8')
+        fname_to_write = os.path.join(image_dir, fname)
+        print "fname_to_write", fname_to_write
+
+        if os.path.exists(fname_to_write):
+            print "Found image in scrapedir, skipping."
+        else:
+            print "Fetching image: %s" % self.decoded_url
+            img = requests.get(self.decoded_url)
+
+            if not os.path.exists(image_dir):
+                os.makedirs(image_dir)
+            with open(fname_to_write, 'w') as f:
+                f.write(img.content)
+
         return fname_to_write
 
 
