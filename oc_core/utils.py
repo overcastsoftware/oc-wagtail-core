@@ -21,6 +21,10 @@ class ImageImporter(object):
         self.decoded_url = self.decode_url()
         self.filename = self.get_filename_from_url()
 
+        if self.title is  None:
+            self.title = self.filename
+
+
         Image = get_image_model()
 
         try:
@@ -99,8 +103,6 @@ class ImageImporter(object):
         f=open(file_path, 'r')
         myfile = File(f)
 
-        if self.title is  None:
-            self.title = self.filename
 
         form = ImageForm({'title': self.title}, {'file': myfile})
 
