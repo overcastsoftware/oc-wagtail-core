@@ -96,6 +96,7 @@ class Navigation(models.Model):
                         ('url', blocks.CharBlock()),
                     ])),
                 ('link_page', blocks.PageChooserBlock()),
+                ('mega_menu', blocks.BooleanBlock(label="Show_in_mega_menu", default=False, blank=True, required=False)),
             ])))])),
     ], blank=True)
 
