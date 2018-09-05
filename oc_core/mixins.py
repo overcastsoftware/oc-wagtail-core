@@ -1,10 +1,18 @@
 from django.db import models
 
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
-    PageChooserPanel
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
-from wagtail.wagtailcore.models import Page
+import wagtail
+if wagtail.VERSION[0] >= 2:
+    from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, \
+        PageChooserPanel
+    from wagtail.images.edit_handlers import ImageChooserPanel
+    from wagtail.documents.edit_handlers import DocumentChooserPanel
+    from wagtail.core.models import Page
+else:
+    from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
+        PageChooserPanel
+    from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+    from wagtail.wagtaildocuments.edit_handlers import DocumentChooserPanel
+    from wagtail.wagtailcore.models import Page
 
 
 class CustomTemplateMixin(models.Model):

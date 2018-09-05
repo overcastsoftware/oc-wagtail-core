@@ -1,4 +1,8 @@
-from wagtail.wagtailcore import hooks
+import wagtail
+if wagtail.VERSION[0] >= 2:
+    from wagtail.core import hooks
+else:
+    from wagtail.wagtailcore import hooks
 from django.conf import settings
 from django.utils.html import format_html_join
 

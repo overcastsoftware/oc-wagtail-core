@@ -6,7 +6,12 @@ from django.db import transaction
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 
-from wagtail.wagtailcore.models import Page, Site
+import wagtail
+if wagtail.VERSION[0] >= 2:
+    from wagtail.core.models import Page, Site
+else:
+    from wagtail.wagtailcore.models import Page, Site
+
 
 from oc_core.utils import ImageImporter
 

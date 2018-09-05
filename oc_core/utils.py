@@ -2,11 +2,18 @@
 import os
 import urllib2
 import requests
-from wagtail.wagtailimages.models import get_image_model
-from wagtail.wagtailimages.forms import get_image_form
-from wagtail.wagtailimages.fields import ALLOWED_EXTENSIONS
 from django.core.files import File
 from willow.image import Image as WillowImage
+
+import wagtail
+if wagtail.VERSION[0] >= 2:
+    from wagtail.images.models import get_image_model
+    from wagtail.images.forms import get_image_form
+    from wagtail.images.fields import ALLOWED_EXTENSIONS
+else:
+    from wagtail.wagtailimages.models import get_image_model
+    from wagtail.wagtailimages.forms import get_image_form
+    from wagtail.wagtailimages.fields import ALLOWED_EXTENSIONS
 
 
 class ImageImporter(object):
@@ -123,7 +130,7 @@ class ImageImporter(object):
 
 
 # test
-# from wagtail.wagtailimages.models import get_image_model
+# from wagtail.images.models import get_image_model
 # Image = get_image_model()
 # from oc_core.utils import ImageImporter
 # importer = ImageImporter("http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/4/11/1397210130748/Spring-Lamb.-Image-shot-2-011.jpg", title=u"Lamb að hoppa", tags=[u"Lamb", u"Hoppa", u"Draumur"])

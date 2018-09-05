@@ -1,7 +1,11 @@
 from django.conf import settings
 from django.utils.safestring import mark_safe
 
-from wagtail.wagtailadmin.edit_handlers import BaseFieldPanel
+import wagtail
+if wagtail.VERSION[0] >= 2:
+    from wagtail.admin.edit_handlers import BaseFieldPanel
+else:
+    from wagtail.wagtailadmin.edit_handlers import BaseFieldPanel
 
 
 #https://gist.github.com/alej0varas/64e07b1f585f46f0fab2

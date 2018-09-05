@@ -11,8 +11,11 @@ def server_name(request):
     return {'server_name': hostname}
 
 
-
-from wagtail.wagtailcore.models import Site
+import wagtail
+if wagtail.VERSION[0] >= 2:
+    from wagtail.core.models import Site
+else:
+    from wagtail.wagtailcore.models import Site
 
 def site(request):
     return {
