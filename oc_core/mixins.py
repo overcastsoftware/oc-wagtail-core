@@ -11,7 +11,7 @@ else:
     from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
         PageChooserPanel
     from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-    from wagtail.wagtaildocuments.edit_handlers import DocumentChooserPanel
+    from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
     from wagtail.wagtailcore.models import Page
 
 
