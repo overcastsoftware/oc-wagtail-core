@@ -67,7 +67,7 @@ class Migration(migrations.Migration):
                 ('link_external', models.URLField(verbose_name=b'External link', blank=True)),
                 ('embed_url', models.URLField(verbose_name=b'Embed URL', blank=True)),
                 ('caption', models.CharField(max_length=255, blank=True)),
-                ('image', models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='wagtailimages.Image', null=True, on_delete=django.db.models.deletion.SET_NULL)),
+                ('image', models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='wagtailimages.Image', null=True)),
                 ('link_document', models.ForeignKey(related_name='+', blank=True, to='wagtaildocs.Document', null=True, on_delete=django.db.models.deletion.SET_NULL)),
                 ('link_page', models.ForeignKey(related_name='+', blank=True, to='wagtailcore.Page', null=True, on_delete=django.db.models.deletion.SET_NULL)),
                 ('page', modelcluster.fields.ParentalKey(related_name='carousel_items', to='oc_core.StandardPage')),
