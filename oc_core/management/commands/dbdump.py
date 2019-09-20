@@ -30,13 +30,13 @@ class Command(BaseCommand):
             outfile = args[0]
 
         if self.engine == 'mysql':
-            print 'Doing Mysql backup to database %s into %s' % (self.db, outfile)
+            print('Doing Mysql backup to database %s into %s' % (self.db, outfile))
             self.do_mysql_backup(outfile)
         elif self.engine in ('django.db.backends.postgresql_psycopg2', 'postgresql_psycopg2', 'postgresql'):
-            print 'Doing Postgresql backup to database %s into %s' % (self.db, outfile)
+            print('Doing Postgresql backup to database %s into %s' % (self.db, outfile))
             self.do_postgresql_backup(outfile)
         else:
-            print 'Backup in %s engine not implemented' % self.engine
+            print('Backup in %s engine not implemented' % self.engine)
 
     def do_mysql_backup(self, outfile):
         args = []
@@ -62,5 +62,5 @@ class Command(BaseCommand):
             args += ["--port=%s" % self.port]
         if self.db:
             args += [self.db]
-        print 'pg_dump -Fc %s > %s' % (' '.join(args), outfile)
+        print('pg_dump -Fc %s > %s' % (' '.join(args), outfile))
         subprocess.call(['PGPASSWORD="%s" pg_dump -Fc %s > %s' % (self.passwd, ' '.join(args), outfile)], stdin=subprocess.PIPE, stdout=subprocess.PIPE, close_fds=True, shell=True)
